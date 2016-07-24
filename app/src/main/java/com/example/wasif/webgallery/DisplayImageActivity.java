@@ -26,15 +26,13 @@ public class DisplayImageActivity extends Activity {
 
     ImageView fullImg;
 
+    // using PhotoView for zooming functionalities
     PhotoViewAttacher mAttacher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
         super.onCreate(savedInstanceState);
-
-
 
         setContentView(R.layout.activity_display_image);
 
@@ -45,6 +43,8 @@ public class DisplayImageActivity extends Activity {
         String url = extras.getString("url");
         fullImg = (ImageView) findViewById(R.id.full_image);
 
+
+        // callback to ensure that the PhotoView is attached only after Picasso loads the image
         Callback imageLoaded = new Callback()
         {
             @Override
@@ -70,7 +70,6 @@ public class DisplayImageActivity extends Activity {
         Picasso.with(getApplicationContext()).load(url).into(fullImg, imageLoaded);
 
         mAttacher = new PhotoViewAttacher(fullImg);
-        //SGD = new ScaleGestureDetector(this, new ScaleListener());
     }
 
 }
